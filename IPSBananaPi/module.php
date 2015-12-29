@@ -40,9 +40,9 @@ class IPSBananaPi extends IPSModule
     
     public function Update()
     {
-        $this->SetValueFloat("cpu0freq", (exec("/sys/bus/cpu/devices/cpu0/cpufreq/cpuinfo_cur_freq")));
+        $this->SetValueFloat("cpu0freq", (exec("cat /sys/bus/cpu/devices/cpu0/cpufreq/cpuinfo_cur_freq")));
         //
-        $this->SetValueFloat("cpu1freq", (exec("/sys/bus/cpu/devices/cpu1/cpufreq/cpuinfo_cur_freq")));
+        $this->SetValueFloat("cpu1freq", (exec("cat /sys/bus/cpu/devices/cpu1/cpufreq/cpuinfo_cur_freq")));
         //
         $this->SetValueFloat("voltage", (exec("cat /sys/class/power_supply/ac/voltage_now"))/1000000);
         //
