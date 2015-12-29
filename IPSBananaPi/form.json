@@ -1,0 +1,12 @@
+{
+    "elements":
+            [
+                { "type": "Label", "label": "Intervall für die Aktualisierung aller Daten:" },
+                { "type": "IntervalBox", "name": "Intervall", "caption": "Sekunden" }           
+            ],
+    "actions":
+            [
+                { "type": "Button", "label": "Update", "onClick": "IPSBananaPi_Update($id);" }
+            ]
+   
+}
