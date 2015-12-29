@@ -25,7 +25,7 @@ class IPSBananaPi extends IPSModule
         parent::ApplyChanges();
         
         $this->RegisterVariableFloat("cpu0freq", "CPU0 Frequenz");
-        $this->RegisterVariableFloat("cpu1freq", "CPU0 Frequenz");
+        $this->RegisterVariableFloat("cpu1freq", "CPU1 Frequenz");
         $this->RegisterVariableFloat("voltage", "Spannung");
         $this->RegisterVariableFloat("current", "Strom");
         $this->RegisterVariableFloat("chargevoltage", "Ladespannung");
