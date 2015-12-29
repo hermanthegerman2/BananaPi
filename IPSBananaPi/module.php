@@ -24,16 +24,19 @@ class IPSBananaPi extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         
-        $this->RegisterVariableFloat("cpu0freq", "CPU0 Frequenz");
-        $this->RegisterVariableFloat("cpu1freq", "CPU1 Frequenz");
-        $this->RegisterVariableFloat("voltage", "Spannung");
-        $this->RegisterVariableFloat("current", "Strom");
-        $this->RegisterVariableFloat("chargevoltage", "Ladespannung");
-        $this->RegisterVariableFloat("chargecurrent", "Ladestrom");
+        //Variablenprofil erstellen
+        $this->RegisterProfileInteger("capacity", "", "", " mAh", "0", "1000", "1");
+        
+        $this->RegisterVariableFloat("cpu0freq", "CPU0 Frequenz", "~Hertz");
+        $this->RegisterVariableFloat("cpu1freq", "CPU1 Frequenz", "~Hertz");
+        $this->RegisterVariableFloat("voltage", "Spannung", "~Volt");
+        $this->RegisterVariableFloat("current", "Strom", "~Ampere");
+        $this->RegisterVariableFloat("chargevoltage", "Ladespannung",  "~Volt");
+        $this->RegisterVariableFloat("chargecurrent", "Ladestrom", "~Ampere");
         $this->RegisterVariableString("status", "Status");
         $this->RegisterVariableString("charge", "Ladezustand");
         $this->RegisterVariableString("control", "Modus");
-        $this->RegisterVariableFloat("capacity", "Akkukapazität");
+        $this->RegisterVariableFloat("capacity", "Akkukapazität", "capacity");
         $this->Update();
         $this->SetTimerInterval("ReadBananaPiInfo", $this->ReadPropertyInteger("Intervall")); 
     }
