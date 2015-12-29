@@ -36,7 +36,7 @@ class IPSBananaPi extends IPSModule
         $this->RegisterVariableString("status", "Status");
         $this->RegisterVariableString("charge", "Ladezustand");
         $this->RegisterVariableString("control", "Modus");
-        $this->RegisterVariableFloat("capacity", "Akkukapazität", "capacity");
+        $this->RegisterVariableInteger("capacity", "Akkukapazität", "capacity");
         $this->Update();
         $this->SetTimerInterval("ReadBananaPiInfo", $this->ReadPropertyInteger("Intervall")); 
     }
@@ -61,7 +61,7 @@ class IPSBananaPi extends IPSModule
          //
         $this->SetValueString("control", (exec("cat /sys/class/power_supply/battery/power/control")));
         //
-        $this->SetValueFloat("capacity", (exec("cat /sys/class/power_supply/battery/energy_full_design")) /1);
+        $this->SetValueInteger("capacity", (exec("cat /sys/class/power_supply/battery/energy_full_design")) /1);
         
 
     }
@@ -182,6 +182,7 @@ class IPSBananaPi extends IPSModule
     		IPS_SetVariableProfileIcon($Name, $Icon);
     		IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
     		IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
-		}
+    }
+    
 }
 ?>
