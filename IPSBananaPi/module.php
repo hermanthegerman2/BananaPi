@@ -26,13 +26,15 @@ class IPSBananaPi extends IPSModule
         
         //Variablenprofil erstellen
         $this->RegisterProfileInteger("capacity", "", "", " mAh", "0", "1000", "1");
+        $this->RegisterProfileFloat("voltage", "", "", " V", "0", "1000", "3");
+        $this->RegisterProfileFloat("current", "", "", " mA", "0", "1000", "3");
         
         $this->RegisterVariableInteger("cpu0freq", "CPU0 Frequenz", "~Hertz");
         $this->RegisterVariableInteger("cpu1freq", "CPU1 Frequenz", "~Hertz");
-        $this->RegisterVariableFloat("voltage", "Spannung", "~Volt");
-        $this->RegisterVariableFloat("current", "Strom", "~Ampere");
-        $this->RegisterVariableFloat("chargevoltage", "Ladespannung",  "~Volt");
-        $this->RegisterVariableFloat("chargecurrent", "Ladestrom", "~Ampere");
+        $this->RegisterVariableFloat("voltage", "Spannung", "voltage");
+        $this->RegisterVariableFloat("current", "Strom", "current");
+        $this->RegisterVariableFloat("chargevoltage", "Ladespannung",  "voltage");
+        $this->RegisterVariableFloat("chargecurrent", "Ladestrom", "current");
         $this->RegisterVariableString("status", "Status");
         $this->RegisterVariableInteger("charge", "Ladezustand", "~Intensity.100");
         $this->RegisterVariableString("control", "Modus");
@@ -175,6 +177,23 @@ class IPSBananaPi extends IPSModule
     		else {
     				$profile = IPS_GetVariableProfile($Name);
     				if ($profile['ProfileType'] != 1) {
+    						throw new Exception("Variable profile type does not match for profile ".$Name);
+    				}
+    		}	 
+    		
+    		IPS_SetVariableProfileIcon($Name, $Icon);
+    		IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
+    		IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
+    }
+    
+    protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
+    {
+    		if (!IPS_VariableProfileExists($Name)) {
+    				IPS_CreateVariableProfile($Name, 2);
+    		}
+    		else {
+    				$profile = IPS_GetVariableProfile($Name);
+    				if ($profile['ProfileType'] != 2) {
     						throw new Exception("Variable profile type does not match for profile ".$Name);
     				}
     		}	 
