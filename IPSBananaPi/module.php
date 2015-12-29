@@ -24,8 +24,12 @@ class IPSBananaPi extends IPSModule
         //Never delete this line!
         parent::ApplyChanges();
         
+        $this->RegisterVariableFloat("cpu0freq", "CPU0 Frequenz");
+        $this->RegisterVariableFloat("cpu1freq", "CPU0 Frequenz");
         $this->RegisterVariableFloat("voltage", "Spannung");
         $this->RegisterVariableFloat("current", "Strom");
+        $this->RegisterVariableFloat("chargevoltage", "Ladespannung");
+        $this->RegisterVariableFloat("chargecurrent", "Ladestrom");
         $this->RegisterVariableString("status", "Status");
         $this->RegisterVariableString("charge", "Ladezustand");
         $this->RegisterVariableString("control", "Modus");
@@ -36,10 +40,17 @@ class IPSBananaPi extends IPSModule
     
     public function Update()
     {
+        $this->SetValueFloat("cpu0freq", (exec("/sys/bus/cpu/devices/cpu0/cpufreq/cpuinfo_cur_freq")));
         //
-        $this->SetValueFloat("voltage", (exec("cat /sys/class/power_supply/battery/voltage_now"))/1000000);
+        $this->SetValueFloat("cpu1freq", (exec("/sys/bus/cpu/devices/cpu1/cpufreq/cpuinfo_cur_freq")));
         //
-        $this->SetValueFloat("current", (exec("cat /sys/class/power_supply/battery/current_now"))/1000000);
+        $this->SetValueFloat("voltage", (exec("cat /sys/class/power_supply/ac/voltage_now"))/1000000);
+        //
+        $this->SetValueFloat("current", (exec("cat /sys/class/power_supply/ac/current_now"))/1000000);
+        //
+        $this->SetValueFloat("chargevoltage", (exec("cat /sys/class/power_supply/battery/voltage_now"))/1000000);
+        //
+        $this->SetValueFloat("chargecurrent", (exec("cat /sys/class/power_supply/battery/current_now"))/1000000);
         //
         $this->SetValueString("status", (exec("cat /sys/class/power_supply/battery/status")));
         //
@@ -48,6 +59,8 @@ class IPSBananaPi extends IPSModule
         $this->SetValueString("control", (exec("cat /sys/class/power_supply/battery/power/control")));
         //
         $this->SetValueFloat("capacity", (exec("cat /sys/class/power_supply/battery/energy_full_design")) /1);
+        
+
     }
     
 ################## PRIVATE
