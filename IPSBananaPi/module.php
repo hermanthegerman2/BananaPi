@@ -185,7 +185,7 @@ class IPSBananaPi extends IPSModule
     		IPS_SetVariableProfileIcon($Name, $Icon);
     		IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
     		IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
-                IPS_SetVariableProfileDigit($Name, $Digits);
+                IPS_SetVariableProfileDigits($Name, $Digits);
     }
     
     protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
@@ -203,7 +203,7 @@ class IPSBananaPi extends IPSModule
     		IPS_SetVariableProfileIcon($Name, $Icon);
     		IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
     		IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
-                IPS_SetVariableProfileDigit($Name, $Digits);
+                IPS_SetVariableProfileDigits($Name, $Digits);
     }
     
 }
