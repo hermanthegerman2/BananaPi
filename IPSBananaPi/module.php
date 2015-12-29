@@ -26,7 +26,7 @@ class IPSBananaPi extends IPSModule
         
         //Variablenprofil erstellen
         $this->RegisterProfileInteger("capacity", "", "", " mAh", "0", "0", "1000", "1");
-        $this->RegisterProfileFloat("frequency", "", "", " MHz", "0", "0", "100", "2");
+        $this->RegisterProfileFloat("frequency", "", "", " GHz", "0", "0", "100", "2");
         $this->RegisterProfileFloat("voltage", "", "", " V", "0", "0", "250", "3");
         $this->RegisterProfileFloat("current", "", "", " A", "0", "0", "16", "3");
         
