@@ -27,14 +27,14 @@ class IPSBananaPi extends IPSModule
         //Variablenprofil erstellen
         $this->RegisterProfileInteger("capacity", "", "", " mAh", "0", "1000", "1");
         
-        $this->RegisterVariableFloat("cpu0freq", "CPU0 Frequenz", "~Hertz");
-        $this->RegisterVariableFloat("cpu1freq", "CPU1 Frequenz", "~Hertz");
+        $this->RegisterVariableInteger("cpu0freq", "CPU0 Frequenz", "~Hertz");
+        $this->RegisterVariableInteger("cpu1freq", "CPU1 Frequenz", "~Hertz");
         $this->RegisterVariableFloat("voltage", "Spannung", "~Volt");
         $this->RegisterVariableFloat("current", "Strom", "~Ampere");
         $this->RegisterVariableFloat("chargevoltage", "Ladespannung",  "~Volt");
         $this->RegisterVariableFloat("chargecurrent", "Ladestrom", "~Ampere");
         $this->RegisterVariableString("status", "Status");
-        $this->RegisterVariableString("charge", "Ladezustand");
+        $this->RegisterVariableInteger("charge", "Ladezustand", "~Intensity.1");
         $this->RegisterVariableString("control", "Modus");
         $this->RegisterVariableInteger("capacity", "Akkukapazität", "capacity");
         $this->Update();
@@ -43,9 +43,9 @@ class IPSBananaPi extends IPSModule
     
     public function Update()
     {
-        $this->SetValueFloat("cpu0freq", (exec("cat /sys/bus/cpu/devices/cpu0/cpufreq/cpuinfo_cur_freq")));
+        $this->SetValueInteger("cpu0freq", (exec("cat /sys/bus/cpu/devices/cpu0/cpufreq/cpuinfo_cur_freq")));
         //
-        $this->SetValueFloat("cpu1freq", (exec("cat /sys/bus/cpu/devices/cpu1/cpufreq/cpuinfo_cur_freq")));
+        $this->SetValueInteger("cpu1freq", (exec("cat /sys/bus/cpu/devices/cpu1/cpufreq/cpuinfo_cur_freq")));
         //
         $this->SetValueFloat("voltage", (exec("cat /sys/class/power_supply/ac/voltage_now"))/1000000);
         //
@@ -57,7 +57,7 @@ class IPSBananaPi extends IPSModule
         //
         $this->SetValueString("status", (exec("cat /sys/class/power_supply/battery/status")));
         //
-        $this->SetValueString("charge", (int)(exec("cat /sys/class/power_supply/battery/capacity")));
+        $this->SetValueInteger("charge", (int)(exec("cat /sys/class/power_supply/battery/capacity")));
          //
         $this->SetValueString("control", (exec("cat /sys/class/power_supply/battery/power/control")));
         //
