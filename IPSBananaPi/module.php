@@ -34,7 +34,7 @@ class IPSBananaPi extends IPSModule
         $this->RegisterVariableFloat("chargevoltage", "Ladespannung",  "~Volt");
         $this->RegisterVariableFloat("chargecurrent", "Ladestrom", "~Ampere");
         $this->RegisterVariableString("status", "Status");
-        $this->RegisterVariableInteger("charge", "Ladezustand", "~Intensity.1");
+        $this->RegisterVariableInteger("charge", "Ladezustand", "~Intensity.100");
         $this->RegisterVariableString("control", "Modus");
         $this->RegisterVariableInteger("capacity", "Akkukapazität", "capacity");
         $this->Update();
