@@ -37,17 +37,17 @@ class IPSBananaPi extends IPSModule
     public function Update()
     {
         //
-        $this->SetValueFloat("voltage", (exec(" cat /sys/class/power_supply/battery/voltage_now"))/1000000);
+        //$this->SetValueFloat("voltage", (exec("cat /sys/class/power_supply/battery/voltage_now"))/1000000);
         //
-        $this->SetValueFloat("current", (exec(" cat /sys/class/power_supply/battery/current_now"))/1000000);
+        $this->SetValueFloat("current", (exec("cat /sys/class/power_supply/battery/current_now"))/1000000);
         //
         $this->SetValueString("status", (exec("cat /sys/class/power_supply/battery/status")));
         //
         $this->SetValueString("charge", (int)(exec("cat /sys/class/power_supply/battery/capacity")));
          //
-        $this->SetValueFloat("chargecurrent", (exec(" cat /sys/class/power_supply/battery/current_now"))/1000000);
+        $this->SetValueFloat("chargecurrent", (exec("cat /sys/class/power_supply/battery/current_now"))/1000000);
         //
-        $this->SetValueFloat("capacity", (exec(" cat /sys/class/power_supply/battery/energy_full_design")) /1);
+        $this->SetValueFloat("capacity", (exec("cat /sys/class/power_supply/battery/energy_full_design")) /1);
     }
     
 ################## PRIVATE     
