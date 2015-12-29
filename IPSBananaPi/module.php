@@ -37,7 +37,7 @@ class IPSBananaPi extends IPSModule
     public function Update()
     {
         //
-        //$this->SetValueFloat("voltage", (exec("cat /sys/class/power_supply/battery/voltage_now"))/1000000);
+        $this->SetValueFloat("voltage", (exec("cat /sys/class/power_supply/battery/voltage_now"))/1000000);
         //
         $this->SetValueFloat("current", (exec("cat /sys/class/power_supply/battery/current_now"))/1000000);
         //
@@ -50,7 +50,41 @@ class IPSBananaPi extends IPSModule
         $this->SetValueFloat("capacity", (exec("cat /sys/class/power_supply/battery/energy_full_design")) /1);
     }
     
-################## PRIVATE     
+################## PRIVATE
+    
+    private function SetValueInteger($Ident, $value)
+    {
+        $id = $this->GetIDForIdent($Ident);
+        if (GetValueInteger($id) <> $value)
+        {
+            SetValueInteger($id, $value);
+            return true;
+        }
+        return false;
+    }
+    
+    private function SetValueFloat($Ident, $value)
+    {
+        $id = $this->GetIDForIdent($Ident);
+        if (GetValueFloat($id) <> $value)
+        {
+            SetValueFloat($id, $value);
+            return true;
+        }
+        return false;
+    }
+    
+    private function SetValueString($Ident, $value)
+    {
+        $id = $this->GetIDForIdent($Ident);
+        if (GetValueString($id) <> $value)
+        {
+            SetValueString($id, $value);
+            return true;
+        }
+        return false;
+    }
+    
     protected function RegisterTimer($Name, $Interval, $Script)
     {
         $id = @IPS_GetObjectIDByIdent($Name, $this->InstanceID);
