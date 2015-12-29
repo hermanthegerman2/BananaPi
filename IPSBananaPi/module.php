@@ -26,11 +26,12 @@ class IPSBananaPi extends IPSModule
         
         //Variablenprofil erstellen
         $this->RegisterProfileInteger("capacity", "", "", " mAh", "0", "1000", "1");
+        $this->RegisterProfileInteger("frequency", "", "", " MHz", "0", "1000", "1");
         $this->RegisterProfileFloat("voltage", "", "", " V", "0", "250", "3");
         $this->RegisterProfileFloat("current", "", "", " A", "0", "16", "3");
         
-        $this->RegisterVariableInteger("cpu0freq", "CPU0 Frequenz", "~Hertz");
-        $this->RegisterVariableInteger("cpu1freq", "CPU1 Frequenz", "~Hertz");
+        $this->RegisterVariableInteger("cpu0freq", "CPU0 Frequenz", "frequency");
+        $this->RegisterVariableInteger("cpu1freq", "CPU1 Frequenz", "frequency");
         $this->RegisterVariableFloat("voltage", "Spannung", "voltage");
         $this->RegisterVariableFloat("current", "Strom", "current");
         $this->RegisterVariableFloat("chargevoltage", "Ladespannung",  "voltage");
@@ -45,9 +46,9 @@ class IPSBananaPi extends IPSModule
     
     public function Update()
     {
-        $this->SetValueInteger("cpu0freq", (exec("cat /sys/bus/cpu/devices/cpu0/cpufreq/cpuinfo_cur_freq")));
+        $this->SetValueInteger("cpu0freq", (exec("cat /sys/bus/cpu/devices/cpu0/cpufreq/cpuinfo_cur_freq"))/1000000);
         //
-        $this->SetValueInteger("cpu1freq", (exec("cat /sys/bus/cpu/devices/cpu1/cpufreq/cpuinfo_cur_freq")));
+        $this->SetValueInteger("cpu1freq", (exec("cat /sys/bus/cpu/devices/cpu1/cpufreq/cpuinfo_cur_freq"))/1000000);
         //
         $this->SetValueFloat("voltage", (exec("cat /sys/class/power_supply/ac/voltage_now"))/1000000);
         //
