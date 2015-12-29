@@ -25,10 +25,10 @@ class IPSBananaPi extends IPSModule
         parent::ApplyChanges();
         
         //Variablenprofil erstellen
-        $this->RegisterProfileInteger("capacity", "", "", " mAh", "0", "1000", "1");
-        $this->RegisterProfileFloat("frequency", "", "", " MHz", "0", "100", "2");
-        $this->RegisterProfileFloat("voltage", "", "", " V", "0", "250", "3");
-        $this->RegisterProfileFloat("current", "", "", " A", "0", "16", "3");
+        $this->RegisterProfileInteger("capacity", "", "", " mAh", "0", "0", "1000", "1");
+        $this->RegisterProfileFloat("frequency", "", "", " MHz", "0", "0", "100", "2");
+        $this->RegisterProfileFloat("voltage", "", "", " V", "0", "0", "250", "3");
+        $this->RegisterProfileFloat("current", "", "", " A", "0", "0", "16", "3");
         
         $this->RegisterVariableFloat("cpu0freq", "CPU0 Frequenz", "frequency");
         $this->RegisterVariableFloat("cpu1freq", "CPU1 Frequenz", "frequency");
@@ -170,7 +170,7 @@ class IPSBananaPi extends IPSModule
         }
     }
     
-    protected function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
+    protected function RegisterProfileInteger($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
     {
     		if (!IPS_VariableProfileExists($Name)) {
     				IPS_CreateVariableProfile($Name, 1);
@@ -185,9 +185,10 @@ class IPSBananaPi extends IPSModule
     		IPS_SetVariableProfileIcon($Name, $Icon);
     		IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
     		IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
+                IPS_SetVariableProfileDigit($Name, $Digits);
     }
     
-    protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize)
+    protected function RegisterProfileFloat($Name, $Icon, $Prefix, $Suffix, $MinValue, $MaxValue, $StepSize, $Digits)
     {
     		if (!IPS_VariableProfileExists($Name)) {
     				IPS_CreateVariableProfile($Name, 2);
@@ -202,6 +203,7 @@ class IPSBananaPi extends IPSModule
     		IPS_SetVariableProfileIcon($Name, $Icon);
     		IPS_SetVariableProfileText($Name, $Prefix, $Suffix);
     		IPS_SetVariableProfileValues($Name, $MinValue, $MaxValue, $StepSize);
+                IPS_SetVariableProfileDigit($Name, $Digits);
     }
     
 }
